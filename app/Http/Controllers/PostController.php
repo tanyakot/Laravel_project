@@ -87,17 +87,12 @@ class PostController extends Controller
 
     }
 
-
     public function paginate()
     {
         $posts = Post::paginate(5);
 
         return view('posts', compact('posts'));
     }
-
-
-
-
 
 
 
