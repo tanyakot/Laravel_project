@@ -28,7 +28,6 @@ class PostController extends Controller
         return view('posts', ['posts' => Post::with('user')->get(), 'user' => $user]);
     }
 
-
     public function show(Post $post,  \Illuminate\Http\Request $request)
     {
         $user = $request->user();
@@ -37,7 +36,6 @@ class PostController extends Controller
         }
         return view('postsinfo', ['post' => $post]);
     }
-
 
     public function store(CreatePostRequest $request)
     {
