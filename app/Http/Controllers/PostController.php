@@ -96,7 +96,6 @@ class PostController extends Controller
 
 
 
-
     public function like(int $postId, Request $request)
     {
         if (!($user = $request->user())) {
