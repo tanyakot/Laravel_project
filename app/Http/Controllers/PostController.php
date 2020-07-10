@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-
     private $postService;
     public function __construct(PostService $postService)
     {
@@ -65,6 +64,7 @@ class PostController extends Controller
             return redirect('/posts');
         }
         if ($newTitle=Arr::get($validatedData, 'title')){
+
             $post->title = $newTitle;
         }
         if ($newDescription = Arr::get($validatedData, 'description')){
