@@ -76,7 +76,6 @@ class PostController extends Controller
         return redirect('/posts');
     }
 
-
     public function destroy(Post $post, \Illuminate\Http\Request $request )
     {
         $user = $request->user();
