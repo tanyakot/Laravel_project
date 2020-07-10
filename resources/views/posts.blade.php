@@ -17,34 +17,31 @@
         <th>Description</th>
         <th>User</th>
         <th>Create_at</th>
-        <th>Likes</th>
-        <th>Read post</th>
+        <th>Edit</th>
+        <td> Likes</td>
         </thead>
         <tbody>
         @foreach($posts as $post)
            <tr>
-            <td>{{$post->id}}</td>
+
+               <td>{{$post->id}}</td>
             <td>{{$post->title}}</td>
             <td>{{$post->description}}</td>
                <td>{{$post->user->name}}</td>
                <td>{{$post->created_at}}</td>
+
+                   <td> <a href="posts/{{$post->id}}" class="btn btn-primary">Edit</a> </td>
+
                <td>
-                   <span id="likes_count_{{$post->id}}"></span>
+                   <span id="likes_count_{{$post->id}}0"></span>
                    <img id="ico_{{$post['id']}}" width="20" src="@if($post['liked_by_me'])hr.png @else hw.png @endif" style="cursor:pointer;" onclick="setLike({{$post['id']}})">
                </td>
-               <td><a href="posts/{{$post->id}}"class="btn btn primary">Read</a></td>
            </tr>
         @endforeach
         </tbody>
     </table>
 
 </div>
-
-<div class="pagination">
-    {{$posts->links()}}
-</div>
-
-
 <script>
     function setLike(postId) {
         let src = $("#ico_" + postId).attr('src').trim();
@@ -64,6 +61,10 @@
         })
     }
 </script>
+<div class="pagination">
+    {{$posts ?? ''->links()}}
+</div>
+
 
 
 @endsection

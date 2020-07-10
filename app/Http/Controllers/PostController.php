@@ -5,31 +5,42 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Requests\CreatePostRequest;
+use App\Http\Requests\UpdatePostReuest;
+use App\Http\Services\PostService;
 use App\Models\Post;
 use App\Models\User;
+use http\Env\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function index()
+
+    private $postService;
+    public function __construct(PostService $postService)
     {
-        $posts = Post::with('user')->get();
-        // $posts=Post::all();
-        //dd($posts);
-        return view('posts', ['posts' => $posts]);
+        $this->postService = $postService;
     }
 
-    public function show(Post $post)
+    public function index()
     {
+        $user = Auth::user();
+        return view('posts', ['posts' => Post::with('user')->get(), 'user' => $user]);
+    }
+
+
+    public function show(Post $post,  \Illuminate\Http\Request $request)
+    {
+        $user = $request->user();
+        if (!$user || $user->id !== $post->user_id){
+            return redirect('/posts');
+        }
         return view('postsinfo', ['post' => $post]);
     }
 
+
     public function store(CreatePostRequest $request)
     {
-//$title=$request->title ?? '';
-        // $description=$request->description ?? '';
-        //  dd($title, $description);
-        //dd($request->validated());
         if (!$user = $request->user()) {
             die("user unauthorized");
         }
@@ -39,28 +50,65 @@ class PostController extends Controller
         $post->description = Arr::get($validatedData, 'description', 'Unknown');
         $post->user_id = $request->user()->id;
         $post->save();
+
         return redirect('posts');
 
     }
 
-    public function update($id)
+    public function update(Post $post, UpdatePostReuest $request)
     {
-        die("Update of Posts");
+        $user = $request->user();
+        if (!$user || $user->id !== $post->user_id){
+            return redirect('/posts');
+        }
+        $validatedData = $request->validated();
+
+        if (!$validatedData){
+            return redirect('/posts');
+        }
+        if ($newTitle=Arr::get($validatedData, 'title')){
+            $post->title = $newTitle;
+        }
+        if ($newDescription = Arr::get($validatedData, 'description')){
+            $post-> description = $newDescription;
+        }
+        $post -> save();
+        return redirect('/posts');
     }
 
-    public function destroy($id)
-    {
 
-        die("Delete of Posts");
+    public function destroy(Post $post, \Illuminate\Http\Request $request )
+    {
+        $user = $request->user();
+        if (!$user || $user->id !== $post->user_id) {
+            return redirect('/posts');
+        }
+        $post->delete();
+        return redirect('/posts');
+
     }
+
 
     public function paginate()
     {
-
         $posts = Post::paginate(5);
 
         return view('posts', compact('posts'));
     }
 
 
+
+
+
+
+
+
+    public function like(int $postId, Request $request)
+    {
+        if (!($user = $request->user())) {
+            return response()->json(['error' => true, 'message' => "Unauth!"], Response::HTTP_UNAUTHORIZED);
+        }
+
+        return response()->json(['status' => $this->PostServices->setLike($postId, $user)]);
+    }
 }
