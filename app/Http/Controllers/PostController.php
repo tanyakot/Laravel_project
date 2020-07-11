@@ -6,7 +6,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostReuest;
+<<<<<<< HEAD
 use App\Services\LikeService;
+=======
+use App\Http\Services\PostService;
+>>>>>>> c680696080ab1fe4383260c70c618f0cda564f4f
 use App\Models\Post;
 use App\Models\User;
 use http\Env\Request;
@@ -15,11 +19,20 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+<<<<<<< HEAD
    // private $postService;
    // public function __construct(PostService $postService)
  //   {
    //     $this->postService = $postService;
    // }
+=======
+
+    private $pt add .ostService;
+    public function __construct(PostService $postService)
+    {
+        $this->postService = $postService;
+    }
+>>>>>>> c680696080ab1fe4383260c70c618f0cda564f4f
 
     public function index()
     {
