@@ -14,9 +14,6 @@
 
 
 
-
-
-
     <form action="/posts/{{$post->id}}" class="form-group" method="POST">
         <input type="hidden" name="_method" value="DELETE">
         @csrf

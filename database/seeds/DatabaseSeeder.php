@@ -13,8 +13,7 @@ class DatabaseSeeder extends Seeder
     {
 
         $start=
-
+            $this->call(CreatePostLikesSeed::class);
             $this->call(CreateUsersSeed::class);
-        $this->call(CreatePostLikesSeed::class);
     }
 }

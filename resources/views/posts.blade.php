@@ -18,52 +18,34 @@
         <th>User</th>
         <th>Create_at</th>
         <th>Edit</th>
-        <td> Likes</td>
         </thead>
         <tbody>
         @foreach($posts as $post)
            <tr>
-
                <td>{{$post->id}}</td>
             <td>{{$post->title}}</td>
             <td>{{$post->description}}</td>
                <td>{{$post->user->name}}</td>
                <td>{{$post->created_at}}</td>
-
                    <td> <a href="posts/{{$post->id}}" class="btn btn-primary">Edit</a> </td>
 
-               <td>
-                   <span id="likes_count_{{$post->id}}0"></span>
-                   <img id="ico_{{$post['id']}}" width="20" src="@if($post['liked_by_me'])hr.png @else hw.png @endif" style="cursor:pointer;" onclick="setLike({{$post['id']}})">
-               </td>
            </tr>
         @endforeach
         </tbody>
     </table>
 
 </div>
-<script>
-    function setLike(postId) {
-        let src = $("#ico_" + postId).attr('src').trim();
-        let likesCount = parseInt($("#likes_count_" + postId).text());
-        if (src === "hr.png") {
-            //disliked
-            $("#ico_" + postId).attr('src', 'hw.png');
-            likesCount--;
-        } else {
-            //liked
-            $("#ico_" + postId).attr('src', 'hr.png');
-            likesCount++;
-        }
-        $("#likes_count_" + postId).text(likesCount);
-        $.post("/posts/" + postId + '/like', function (res) {
-            console.log(res);
-        })
-    }
-</script>
+
+
 <div class="pagination">
     {{$posts ?? ''->links()}}
 </div>
+
+
+
+
+
+
 
 
 

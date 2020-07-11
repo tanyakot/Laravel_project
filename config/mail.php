@@ -38,9 +38,9 @@ return [
             'transport' => 'smtp',
             'host' => env('MAIL_HOST', 'smtp.gmail.com'),
             'port' => env('MAIL_PORT', 465),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+            'encryption' => env('MAIL_ENCRYPTION', 'tsl'),
             'username' => env('tanyakotol5@gmail.com'),
-            'password' => env(''),
+            'password' => env('syepfmjdgwcmaoty'),
             'timeout' => null,
             'auth_mode' => null,
         ],
@@ -85,7 +85,7 @@ return [
 
     'from' => [
         'address' => env('tanyakotol5@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Blog!'),
+        'name' => env('MAIL_FROM_NAME', 'Blog Blog'),
     ],
 
     /*

@@ -1,10 +1,15 @@
 <?php
 
+namespace App\Services;
 
-namespace App\Http\Services;
 
+use App\Models\Post;
+use App\Models\PostLike;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class PostLikeService
+class LikeService
 {
     public function getPosts(?User $user = null): array
     {

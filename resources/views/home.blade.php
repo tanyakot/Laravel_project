@@ -1,50 +1,48 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-    </nav>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown link
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
-        <div class="card">
-            <div class="card-body">
-
-        </div>
+    <div class="container">
+        <table class="table">
+            <thead>
+            <th>ID</th>
+            <th>Text</th>
+            <th>UserID</th>
+            <th>Likes</th>
+            </thead>
+            <tbody>
+            @foreach ($posts as $post)
+                <tr>
+                    <td>{{$post['id']}}</td>
+                    <td>{{$post['text']}}</td>
+                    <td>{{$post['user_id']}}</td>
+                    <td>
+                        <span id="likes_count_{{$post['id']}}">{{$post['likes']}}</span> <img id="ico_{{$post['id']}}" width="20" src="@if($post['liked_by_me'])hr.png @else hw.png @endif" style="cursor:pointer;" onclick="setLike({{$post['id']}})">
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</div>
+
+    <script>
+        function setLike(postId) {
+            let src = $("#ico_" + postId).attr('src').trim();
+            let likesCount = parseInt($("#likes_count_" + postId).text());
+            if (src === "hr.png") {
+                //disliked
+                $("#ico_" + postId).attr('src', 'hw.png');
+                likesCount--;
+            } else {
+                //liked
+                $("#ico_" + postId).attr('src', 'hr.png');
+                likesCount++;
+            }
+            $("#likes_count_" + postId).text(likesCount);
+            $.post("/posts/" + postId + '/like', function (res) {
+                console.log(res);
+            })
+        }
+    </script>
 @endsection
-
-
-
-
