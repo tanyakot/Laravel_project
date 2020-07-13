@@ -19,20 +19,6 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-<<<<<<< HEAD
-   // private $postService;
-   // public function __construct(PostService $postService)
- //   {
-   //     $this->postService = $postService;
-   // }
-=======
-
-    private $pt add .ostService;
-    public function __construct(PostService $postService)
-    {
-        $this->postService = $postService;
-    }
->>>>>>> c680696080ab1fe4383260c70c618f0cda564f4f
 
     public function index()
     {
