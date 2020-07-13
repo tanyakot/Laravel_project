@@ -6,11 +6,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostReuest;
-<<<<<<< HEAD
+
 use App\Services\LikeService;
-=======
+
 use App\Http\Services\PostService;
->>>>>>> c680696080ab1fe4383260c70c618f0cda564f4f
+
 use App\Models\Post;
 use App\Models\User;
 use http\Env\Request;
