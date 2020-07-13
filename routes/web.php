@@ -21,3 +21,7 @@ Route::get('posts', 'PostController@paginate');
 Route::post('/posts/{post_id}/like', 'PostsController@like')->name('like');
 
 Route::get('/send-email', 'FeedbackController@send');
+
+Route::get('/about', function (){
+    return view('about');
+});
