@@ -1,6 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <h5 class="my-0 mr-md-auto font-weight-normal">Blog</h5>
+        <nav class="my-2 my-md-0 mr-md-3">
+            <a class="p-2 text-dark" href="/home">Home</a>
+            <a class="p-2 text-dark" href="/posts">Posts</a>
+            <a class="p-2 text-dark" href="/about">About</a>
+        </nav>
+
+    </div>
 <div class="container">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <form action="/posts" method="POST" class="form-group">
@@ -9,6 +19,10 @@
         <textarea name="description" class="form-control" placeholder="Your text"></textarea>
         <button class="btn btn-success">Create</button>
     </form>
+
+
+
+
 
     <table class="table table-bordered table-dark">
         <thead>
@@ -43,10 +57,5 @@
 
 
 
-
-
-
-
-
-
 @endsection
+
