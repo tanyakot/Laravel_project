@@ -38,7 +38,7 @@ return [
             'transport' => 'smtp',
             'host' => env('MAIL_HOST', 'smtp.gmail.com'),
             'port' => env('MAIL_PORT', 465),
-            'encryption' => env('MAIL_ENCRYPTION', 'tsl'),
+            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env(''),
             'password' => env(''),
             'timeout' => null,
