@@ -1,19 +1,17 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 
-use App\Http\Requests\CreatePostRequest;
-use App\Models\Post;
-use App\Models\User;
-use Illuminate\Support\Arr;
+use App\Services\LikeService;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
-class PostLikeController extends Controller
+class LikeController
 {
     private $postService;
 
-    public function __construct(PostService $postService)
+    public function __construct(LikeService $postService)
     {
         $this->postService = $postService;
     }

@@ -12,14 +12,16 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('posts', "PostController");
+Route::resource('posts', "PostController")-> middleware('auth');
 
 Route::get('posts', 'PostController@paginate');
 
-Route::post('posts/{post_id}/like', 'PostLikeController@like')-> name('Like');
+//Route::get('mail', 'MailController@send');
 
+Route::post('/posts/{post_id}/like', 'PostsController@like')->name('like');
 
+Route::get('/send-email', 'FeedbackController@send');
 
-Route::get('mail', 'MailController@send');
-
-
+Route::get('/about', function (){
+    return view('about');
+});

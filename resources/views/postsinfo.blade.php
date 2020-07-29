@@ -2,26 +2,28 @@
 
 @section('content')
 <div class="container">
+    Post ID: {{$post->id}}
 
-    <table class="table table-bordered table-dark">
-        <thead>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>User</th>
-        <th>Create_at</th>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{$post->id}}</td>
-                <td>{{$post->title}}</td>
-                <td>{{$post->description}}</td>
-                <td>{{$post->user->name}}</td>
-                <td>{{$post->created_at}}</td>
-            </tr>
-        </tbody>
-    </table>
+   <form action="/posts/{{$post->id}}" class="form-group" method="POST">
+       <input type="hidden" name="_method" value="PUT">
+       @csrf
+       <input type="text" name="title" value="{{$post->title}}" class="form-control" />
+       <textarea name="description" class="form-control">{{$post->description}}></textarea>
+       <input type="submit"  class="btn btn-outline-dark" value="Update">
+   </form>
+
+
+
+    <form action="/posts/{{$post->id}}" class="form-group" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        @csrf
+
+        <input type="submit"  class="btn btn-dark" value="DELETE">
+    </form>
+
+
 
 
     </div>
 @endsection
+

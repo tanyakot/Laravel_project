@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Services\MailService;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -22,6 +23,7 @@ class RegisterController extends Controller
     |
     */
 
+
     use RegistersUsers;
 
     /**
@@ -31,14 +33,19 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+
+    private $mailService;
+    public function __construct(MailService $mailService)
     {
         $this->middleware('guest');
+        $this->mailService=$mailService;
     }
 
     /**
